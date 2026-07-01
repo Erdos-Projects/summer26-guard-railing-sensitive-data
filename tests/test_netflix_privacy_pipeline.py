@@ -13,7 +13,7 @@ SRC = ROOT / "src"
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
-from guardrails_sensitive_data.anonymization import evaluate_releases
+from guardrails_sensitive_data.anonymization import add_rating_noise, add_time_and_rating_features, evaluate_releases
 from guardrails_sensitive_data.imdb import extract_imdb_user_ratings, match_imdb_to_netflix
 from guardrails_sensitive_data.linkage import LinkageConfig, run_linkage_attack
 from guardrails_sensitive_data.netflix_io import read_movie_titles, read_netflix_ratings
@@ -103,6 +103,23 @@ class NetflixPrivacyPipelineTests(unittest.TestCase):
         self.assertFalse(trials.empty)
         self.assertFalse(trial_summary.empty)
         self.assertIn("remove_month", set(k_summary["release_name"]))
+
+    def test_time_features_from_existing_month(self) -> None:
+        frame = pd.DataFrame(
+            [
+                {"customer_id": 1, "movie_id": 10, "rating": 4, "month": "2005-02"},
+                {"customer_id": 2, "movie_id": 10, "rating": 3, "month": pd.NA},
+            ]
+        )
+        features = add_time_and_rating_features(frame)
+        self.assertIn("year", features.columns)
+        self.assertEqual(int(features.loc[0, "year"]), 2005)
+        self.assertTrue(pd.isna(features.loc[1, "year"]))
+
+    def test_rating_noise_rejects_invalid_probability(self) -> None:
+        ratings = read_netflix_ratings(self.data_dir, include_date=True)
+        with self.assertRaises(ValueError):
+            add_rating_noise(ratings, seed=1, flip_probability=1.5)
 
     def test_rmse_comparison(self) -> None:
         ratings = read_netflix_ratings(self.data_dir, include_date=True)

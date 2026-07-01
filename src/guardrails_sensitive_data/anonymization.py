@@ -9,6 +9,9 @@ import numpy as np
 import pandas as pd
 
 
+MISSING_KEY = "__missing__"
+
+
 @dataclass(frozen=True)
 class ReleaseData:
     name: str
@@ -37,7 +40,14 @@ def add_time_and_rating_features(frame: pd.DataFrame) -> pd.DataFrame:
         dates = pd.to_datetime(data["date"], errors="coerce")
         data["month"] = dates.dt.to_period("M").astype("string")
         data["year"] = dates.dt.year.astype("Int64")
-    elif "month" not in data.columns:
+    elif "month" in data.columns:
+        data["month"] = data["month"].astype("string").fillna("unknown")
+        if "year" not in data.columns:
+            month_dates = pd.to_datetime(data["month"], format="%Y-%m", errors="coerce")
+            data["year"] = month_dates.dt.year.astype("Int64")
+        else:
+            data["year"] = pd.to_numeric(data["year"], errors="coerce").astype("Int64")
+    else:
         data["month"] = "unknown"
         data["year"] = pd.Series([pd.NA] * len(data), dtype="Int64")
 
@@ -55,6 +65,9 @@ def add_time_and_rating_features(frame: pd.DataFrame) -> pd.DataFrame:
 
 
 def add_rating_noise(frame: pd.DataFrame, seed: int, flip_probability: float = 0.25) -> pd.DataFrame:
+    if not 0 <= flip_probability <= 1:
+        raise ValueError("flip_probability must be between 0 and 1.")
+
     data = frame.copy()
     rng = np.random.default_rng(seed)
     noise = rng.choice(
@@ -179,7 +192,7 @@ def fact_k_anonymity(frame: pd.DataFrame, cols: Iterable[str]) -> dict[str, floa
             "pct_unique_facts": np.nan,
         }
 
-    small = frame[list(cols) + ["customer_id"]].drop_duplicates()
+    small = normalize_key_columns(frame[list(cols) + ["customer_id"]].drop_duplicates(), cols)
     sizes = small.groupby(list(cols), dropna=False)["customer_id"].nunique()
     return {
         "fact_count": float(len(sizes)),
@@ -191,12 +204,23 @@ def fact_k_anonymity(frame: pd.DataFrame, cols: Iterable[str]) -> dict[str, floa
 
 
 def build_fact_index(frame: pd.DataFrame, cols: tuple[str, ...]) -> dict[object, set[int]]:
-    small = frame[list(cols) + ["customer_id"]].drop_duplicates()
+    small = normalize_key_columns(frame[list(cols) + ["customer_id"]].drop_duplicates(), cols)
     return small.groupby(list(cols), dropna=False)["customer_id"].agg(lambda values: set(map(int, values))).to_dict()
 
 
+def normalize_key_value(value: object) -> object:
+    return MISSING_KEY if pd.isna(value) else value
+
+
+def normalize_key_columns(frame: pd.DataFrame, cols: Iterable[str]) -> pd.DataFrame:
+    data = frame.copy()
+    for col in cols:
+        data[col] = data[col].astype("object").map(normalize_key_value)
+    return data
+
+
 def row_key(row: pd.Series, cols: tuple[str, ...]) -> object:
-    values = tuple(row[col] for col in cols)
+    values = tuple(normalize_key_value(row[col]) for col in cols)
     return values[0] if len(values) == 1 else values
 
 
