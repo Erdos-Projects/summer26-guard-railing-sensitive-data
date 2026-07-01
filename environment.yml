@@ -8,9 +8,13 @@ dependencies:
   - jupyter >= 1.1
   - matplotlib >= 3.8
   - numpy >= 2.0
-  - pandas >= 2.0
+  - pandas >= 2.2
   - requests >= 2.32
   - scipy >= 1.13
   - seaborn >= 0.13
   - pip:
-      - -e .
+      - "-e ."
+      - "pyarrow>=15.0"
+      - "pyspark[sql]>=4.1,<4.2"
+      - "scikit-learn>=1.9,<2.0"
+      - "sdv>=1.37,<2.0"

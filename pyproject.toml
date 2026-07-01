@@ -3,13 +3,13 @@ name = "guard-railing-sensitive-data"
 version = "0.1.0"
 description = "Netflix Prize privacy attack, anonymization, and utility evaluation pipeline."
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.12,<3.13"
 dependencies = [
     "beautifulsoup4>=4.12",
     "jupyter>=1.1",
     "matplotlib>=3.8",
     "numpy>=2.0",
-    "pandas>=2.0",
+    "pandas>=2.2",
     "requests>=2.32",
     "scipy>=1.13",
     "seaborn>=0.13",
@@ -17,9 +17,10 @@ dependencies = [
 
 [project.optional-dependencies]
 ml = [
-    "pyspark>=3.5",
-    "scikit-learn>=1.5",
-    "sdv>=1.15",
+    "pyarrow>=15.0",
+    "pyspark[sql]>=4.1,<4.2",
+    "scikit-learn>=1.9,<2.0",
+    "sdv>=1.37,<2.0",
 ]
 
 [project.scripts]

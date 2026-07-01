@@ -10,12 +10,17 @@ It now has a concrete direction:
 4. Create anonymized Netflix releases by removing/generalizing dates,
    coarsening ratings, adding noise, suppressing low-k facts, and removing rare
    movies.
-5. Compare privacy risk with k-anonymity and sampled linkage attacks.
-6. Compare utility by training the same rating-prediction baseline on original
-   and anonymized releases and measuring RMSE on true ratings.
+5. Add ML red-team audits with sparse nearest-neighbor linkage and
+   membership-inference classifiers.
+6. Generate synthetic releases with SDV single-table synthesizers.
+7. Compare privacy risk with k-anonymity, sampled linkage attacks, and ML
+   attacks.
+8. Compare utility with recommender baselines, including the package bias model
+   and notebook PySpark ALS experiments.
 
-The old notebooks are still present as historical exploration, but the
-maintained implementation lives in `src/guardrails_sensitive_data`.
+The maintained package implementation lives in `src/guardrails_sensitive_data`.
+The active notebooks in `notebooks/` are empirical studies and prototypes; the
+old notebooks in `notebooks/old/` are historical exploration.
 
 ## Ethical Scope
 
@@ -54,7 +59,24 @@ python main.py download-netflix --archive /path/to/netflix.zip
 
 ## Environment
 
-Using conda:
+The recommended environment is Python 3.12. The ML notebooks use current
+compatible major versions of scikit-learn, SDV, and PySpark:
+
+- `scikit-learn>=1.9,<2.0`
+- `sdv>=1.37,<2.0`
+- `pyspark[sql]>=4.1,<4.2`
+- `pyarrow>=15.0`
+
+PySpark 4.1 requires Java 17 or later with `JAVA_HOME` set. On macOS, for
+example:
+
+```bash
+brew install openjdk@17
+export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+```
+
+Using conda is the easiest path because `environment.yml` installs the package
+plus the notebook ML dependencies:
 
 ```bash
 conda env create -f environment.yml
@@ -62,6 +84,15 @@ conda activate erdos_project_environment
 ```
 
 Or with pip:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -e ".[ml]"
+```
+
+For the lightweight CLI-only install, omit the ML extra:
 
 ```bash
 python -m pip install -e .
@@ -77,6 +108,29 @@ After installation, the same commands are available as:
 
 ```bash
 netflix-privacy --help
+```
+
+## Notebooks
+
+Active notebooks:
+
+- `notebooks/01_synthetic_netflix_generator.ipynb` uses SDV
+  `GaussianCopulaSynthesizer` by default, with simple switches for CTGAN and
+  TVAE.
+- `notebooks/02_ml_deanonymization_attacks.ipynb` uses scikit-learn sparse
+  vectors, `NearestNeighbors`, and `LogisticRegression` for red-team audits.
+- `notebooks/03_als_downstream_and_anonymization_feedback.ipynb` uses PySpark
+  MLlib ALS and item-factor diagnostics to guide targeted anonymization noise.
+- `notebooks/04_empirical_privacy_utility_study.ipynb` is the cohesive
+  report-style study that combines probabilistic linkage, anonymization,
+  nearest-neighbor attacks, membership inference, synthetic data, downstream
+  utility, plots, citations, and takeaways.
+
+Run notebooks from the repository root so relative imports and data paths line
+up:
+
+```bash
+jupyter lab
 ```
 
 ## IMDb Ratings
@@ -148,6 +202,15 @@ Run a small end-to-end demo:
 python main.py run-demo --max-rows 200000 --trials 50
 ```
 
+For the full empirical report, open:
+
+```bash
+jupyter lab notebooks/04_empirical_privacy_utility_study.ipynb
+```
+
+The report notebook has runtime knobs at the top, including `MAX_ROWS`,
+`PRIVACY_TRIALS`, `PROFILE_USERS`, and `SYNTH_TRAIN_ROWS`.
+
 ## Release Variants
 
 The blue-team releases currently evaluated are:
@@ -164,6 +227,21 @@ The blue-team releases currently evaluated are:
 
 `movie_only` is useful for privacy comparison but is skipped for RMSE because it
 does not release rating labels.
+
+## Method References
+
+The notebooks cite the full reference list. The main methodological anchors are:
+
+- Narayanan and Shmatikov, "Robust De-anonymization of Large Sparse Datasets"
+  for the Netflix linkage threat model.
+- Sweeney's k-anonymity model for fact suppression/generalization.
+- scikit-learn nearest-neighbor and logistic-regression models for ML red-team
+  audits.
+- SDV, Gaussian Copula, CTGAN, and TVAE for plug-and-play synthetic tabular
+  data generation.
+- Spark MLlib ALS and matrix factorization for the stronger downstream
+  recommender baseline.
+- Membership-inference attacks for user-presence risk.
 
 ## Tests
 

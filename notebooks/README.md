@@ -23,10 +23,10 @@ python -m pip install -e ".[ml]"
 Equivalent direct install:
 
 ```bash
-python -m pip install scikit-learn pyspark sdv
+python -m pip install "scikit-learn>=1.9,<2.0" "sdv>=1.37,<2.0" "pyspark[sql]>=4.1,<4.2" "pyarrow>=15.0"
 ```
 
-PySpark also needs a local Java runtime available on `PATH`.
+PySpark also needs Java 17 or later with `JAVA_HOME` set.
 
 The notebooks in `old/` are historical exploration. The maintained package path
 is the CLI in `src/guardrails_sensitive_data`:
