@@ -15,6 +15,13 @@ dependencies = [
     "seaborn>=0.13",
 ]
 
+[project.optional-dependencies]
+ml = [
+    "pyspark>=3.5",
+    "scikit-learn>=1.5",
+    "sdv>=1.15",
+]
+
 [project.scripts]
 netflix-privacy = "guardrails_sensitive_data.cli:main"
 
