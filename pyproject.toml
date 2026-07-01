@@ -1,0 +1,26 @@
+[project]
+name = "guard-railing-sensitive-data"
+version = "0.1.0"
+description = "Netflix Prize privacy attack, anonymization, and utility evaluation pipeline."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "beautifulsoup4>=4.12",
+    "jupyter>=1.1",
+    "matplotlib>=3.8",
+    "numpy>=2.0",
+    "pandas>=2.0",
+    "requests>=2.32",
+    "scipy>=1.13",
+    "seaborn>=0.13",
+]
+
+[project.scripts]
+netflix-privacy = "guardrails_sensitive_data.cli:main"
+
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

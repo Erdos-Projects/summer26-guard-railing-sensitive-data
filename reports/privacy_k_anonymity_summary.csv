@@ -1,0 +1,10 @@
+release_name,knowledge_cols,rows_released,rating_col,description,fact_count,min_k,median_k,mean_k,pct_unique_facts
+original_movie_rating_month,movie_id + rating + month,5000,rating,"Original-style release with movie, exact rating, and rating month.",604.0,1.0,5.0,8.278145695364238,12.417218543046356
+remove_month,movie_id + rating,5000,rating,Dates are removed; exact ratings remain.,30.0,11.0,127.0,166.66666666666666,0.0
+year_only,movie_id + rating + year,5000,rating,Exact dates are generalized from month to year.,72.0,2.0,36.0,69.44444444444444,0.0
+coarsen_rating,movie_id + rating_bucket + month,5000,rating_bucket_midpoint,"Ratings are grouped into disliked, neutral, and liked.",391.0,1.0,8.0,12.787723785166241,7.928388746803069
+remove_month_and_coarsen_rating,movie_id + rating_bucket,5000,rating_bucket_midpoint,Dates are removed and ratings are grouped.,18.0,27.0,154.5,277.77777777777777,0.0
+add_rating_noise,movie_id + rating_noisy + month,5000,rating_noisy,"Exact ratings are perturbed by -1, 0, or +1 with clipping.",611.0,1.0,6.0,8.183306055646481,12.76595744680851
+remove_rare_movies_min_10,movie_id + rating + month,5000,rating,Movies below a minimum user-count threshold are removed.,604.0,1.0,5.0,8.278145695364238,12.417218543046356
+k_suppress_movie_rating_month_k5,movie_id + rating + month,4390,rating,Facts with fewer than k distinct users are suppressed.,339.0,5.0,10.0,12.949852507374631,0.0
+movie_only,movie_id,5000,,Only movie ids are released; rating prediction labels are absent.,6.0,142.0,780.5,833.3333333333334,0.0

@@ -1,0 +1,55 @@
+release_name,knowledge_cols,n_known,target_user,candidate_count,unique,surety_pct
+original_movie_rating_month,movie_id + rating + month,1,2641668,33,False,3.0303030303030303
+original_movie_rating_month,movie_id + rating + month,1,2334574,2,False,50.0
+original_movie_rating_month,movie_id + rating + month,2,1515355,1,True,100.0
+original_movie_rating_month,movie_id + rating + month,2,2430267,1,True,100.0
+original_movie_rating_month,movie_id + rating + month,3,2439493,1,True,100.0
+original_movie_rating_month,movie_id + rating + month,3,2439493,1,True,100.0
+remove_month,movie_id + rating,1,2641668,875,False,0.11428571428571428
+remove_month,movie_id + rating,1,2334574,73,False,1.36986301369863
+remove_month,movie_id + rating,2,1515355,2,False,50.0
+remove_month,movie_id + rating,2,2430267,4,False,25.0
+remove_month,movie_id + rating,3,2439493,2,False,50.0
+remove_month,movie_id + rating,3,2439493,4,False,25.0
+year_only,movie_id + rating + year,1,2641668,302,False,0.33112582781456956
+year_only,movie_id + rating + year,1,2334574,28,False,3.5714285714285716
+year_only,movie_id + rating + year,2,1515355,1,True,100.0
+year_only,movie_id + rating + year,2,2430267,4,False,25.0
+year_only,movie_id + rating + year,3,2439493,1,True,100.0
+year_only,movie_id + rating + year,3,2439493,1,True,100.0
+coarsen_rating,movie_id + rating_bucket + month,1,2641668,44,False,2.272727272727273
+coarsen_rating,movie_id + rating_bucket + month,1,2334574,5,False,20.0
+coarsen_rating,movie_id + rating_bucket + month,2,1515355,1,True,100.0
+coarsen_rating,movie_id + rating_bucket + month,2,2430267,1,True,100.0
+coarsen_rating,movie_id + rating_bucket + month,3,2439493,1,True,100.0
+coarsen_rating,movie_id + rating_bucket + month,3,2439493,1,True,100.0
+remove_month_and_coarsen_rating,movie_id + rating_bucket,1,2641668,1232,False,0.08116883116883117
+remove_month_and_coarsen_rating,movie_id + rating_bucket,1,2334574,226,False,0.4424778761061947
+remove_month_and_coarsen_rating,movie_id + rating_bucket,2,1515355,3,False,33.333333333333336
+remove_month_and_coarsen_rating,movie_id + rating_bucket,2,2430267,5,False,20.0
+remove_month_and_coarsen_rating,movie_id + rating_bucket,3,2439493,3,False,33.333333333333336
+remove_month_and_coarsen_rating,movie_id + rating_bucket,3,2439493,8,False,12.5
+add_rating_noise,movie_id + rating_noisy + month,1,2641668,29,False,3.4482758620689653
+add_rating_noise,movie_id + rating_noisy + month,1,2334574,3,False,33.333333333333336
+add_rating_noise,movie_id + rating_noisy + month,2,1515355,1,True,100.0
+add_rating_noise,movie_id + rating_noisy + month,2,2430267,1,True,100.0
+add_rating_noise,movie_id + rating_noisy + month,3,2439493,1,True,100.0
+add_rating_noise,movie_id + rating_noisy + month,3,2439493,1,True,100.0
+remove_rare_movies_min_10,movie_id + rating + month,1,2641668,33,False,3.0303030303030303
+remove_rare_movies_min_10,movie_id + rating + month,1,2334574,2,False,50.0
+remove_rare_movies_min_10,movie_id + rating + month,2,1515355,1,True,100.0
+remove_rare_movies_min_10,movie_id + rating + month,2,2430267,1,True,100.0
+remove_rare_movies_min_10,movie_id + rating + month,3,2439493,1,True,100.0
+remove_rare_movies_min_10,movie_id + rating + month,3,2439493,1,True,100.0
+k_suppress_movie_rating_month_k5,movie_id + rating + month,1,317848,20,False,5.0
+k_suppress_movie_rating_month_k5,movie_id + rating + month,1,2076243,11,False,9.090909090909092
+k_suppress_movie_rating_month_k5,movie_id + rating + month,2,214166,1,True,100.0
+k_suppress_movie_rating_month_k5,movie_id + rating + month,2,1806884,1,True,100.0
+k_suppress_movie_rating_month_k5,movie_id + rating + month,3,1664010,1,True,100.0
+k_suppress_movie_rating_month_k5,movie_id + rating + month,3,1664010,1,True,100.0
+movie_only,movie_id,1,2641668,2012,False,0.04970178926441352
+movie_only,movie_id,1,2334574,2012,False,0.04970178926441352
+movie_only,movie_id,2,1515355,26,False,3.8461538461538463
+movie_only,movie_id,2,2430267,19,False,5.2631578947368425
+movie_only,movie_id,3,2439493,6,False,16.666666666666668
+movie_only,movie_id,3,2439493,11,False,9.090909090909092

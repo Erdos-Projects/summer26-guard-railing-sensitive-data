@@ -1,0 +1,85 @@
+netflix_movie_id,imdb_title,netflix_title,imdb_rating,expected_netflix_rating,rating_low,rating_high,match_method,match_score
+175,Reservoir Dogs,Reservoir Dogs,9.0,4.5,4,5,exact_title_year,1.0
+457,Kill Bill: Vol. 2,Kill Bill: Vol. 2,9.0,4.5,4,5,exact_title_year,1.0
+571,American Beauty,American Beauty,8.0,4.0,4,4,exact_title_year,1.0
+798,Jaws,Jaws,9.0,4.5,4,5,exact_title_year,1.0
+1102,Training Day,Training Day,8.0,4.0,4,4,exact_title_year,1.0
+1180,A Beautiful Mind,A Beautiful Mind,8.0,4.0,4,4,exact_title_year,1.0
+1865,Eternal Sunshine of the Spotless Mind,Eternal Sunshine of the Spotless Mind,8.0,4.0,4,4,exact_title_year,1.0
+2452,The Lord of the Rings: The Fellowship of the Ring,Lord of the Rings: The Fellowship of the Ring,10.0,5.0,5,5,exact_title_year,1.0
+2782,Braveheart,Braveheart,7.0,3.5,3,4,exact_title_year,1.0
+2862,The Silence of the Lambs,The Silence of the Lambs,7.0,3.5,3,4,exact_title_year,1.0
+3864,Batman Begins,Batman Begins,7.0,3.5,3,4,exact_title_year,1.0
+4306,The Sixth Sense,The Sixth Sense,10.0,5.0,5,5,exact_title_year,1.0
+4472,Love Actually,Love Actually,8.0,4.0,4,4,exact_title_year,1.0
+4640,Rain Man,Rain Man,8.0,4.0,4,4,exact_title_year,1.0
+4829,Shaun of the Dead,Shaun of the Dead,8.0,4.0,4,4,exact_title_year,1.0
+5054,Mission: Impossible,Mission: Impossible,1.0,1.0,1,1,exact_title_year,1.0
+5571,Rocky,Rocky,10.0,5.0,5,5,exact_title_year,1.0
+5582,Star Wars: Episode V - The Empire Strikes Back,Star Wars: Episode V: The Empire Strikes Back,8.0,4.0,4,4,exact_title_year,1.0
+5862,Memento,Memento,8.0,4.0,4,4,exact_title_year,1.0
+5924,Snatch,Snatch,9.0,4.5,4,5,exact_title_year,1.0
+5926,Fight Club,Fight Club,6.0,3.0,3,3,exact_title_year,1.0
+6029,Amélie,Amelie,9.0,4.5,4,5,exact_title_year,1.0
+6037,The Bourne Identity,The Bourne Identity,7.0,3.5,3,4,exact_title_year,1.0
+6099,Apocalypse Now,Apocalypse Now,9.0,4.5,4,5,exact_title_year,1.0
+6196,The Terminator,The Terminator,10.0,5.0,5,5,exact_title_year,1.0
+6450,City of God,City of God,9.0,4.5,4,5,exact_title_year,1.0
+6739,Rear Window,Rear Window,9.0,4.5,4,5,exact_title_year,1.0
+6974,The Usual Suspects,The Usual Suspects,8.0,4.0,4,4,exact_title_year,1.0
+7624,Top Gun,Top Gun,3.0,1.5,1,2,exact_title_year,1.0
+8327,One Flew Over the Cuckoo's Nest,One Flew Over the Cuckoo's Nest,10.0,5.0,5,5,exact_title_year,1.0
+8596,Seven,Seven,9.0,4.5,4,5,exact_title_year,1.0
+8644,Catch Me If You Can,Catch Me If You Can,7.0,3.5,3,4,exact_title_year,1.0
+8904,Good Will Hunting,Good Will Hunting,5.0,2.5,2,3,exact_title_year,1.0
+9528,12 Angry Men,12 Angry Men,10.0,5.0,5,5,exact_title_year,1.0
+9628,Star Wars: Episode VI - Return of the Jedi,Star Wars: Episode VI: Return of the Jedi,8.0,4.0,4,4,exact_title_year,1.0
+9818,L.A. Confidential,L.A. Confidential,6.0,3.0,3,3,exact_title_year,1.0
+9882,The Fifth Element,The Fifth Element,9.0,4.5,4,5,exact_title_year,1.0
+9960,Die Hard,Die Hard,9.0,4.5,4,5,exact_title_year,1.0
+10042,Raiders of the Lost Ark,Raiders of the Lost Ark,9.0,4.5,4,5,exact_title_year,1.0
+10225,Groundhog Day,Groundhog Day,9.0,4.5,4,5,exact_title_year,1.0
+10451,A Clockwork Orange,A Clockwork Orange,7.0,3.5,3,4,exact_title_year,1.0
+10730,Gangs of New York,Gangs of New York,5.0,2.5,2,3,exact_title_year,1.0
+10774,Taxi Driver,Taxi Driver,5.0,2.5,2,3,exact_title_year,1.0
+10820,Back to the Future,Back to the Future,8.0,4.0,4,4,exact_title_year,1.0
+10832,Psycho,Psycho,10.0,5.0,5,5,exact_title_year,1.0
+10947,The Incredibles,The Incredibles,9.0,4.5,4,5,exact_title_year,1.0
+11064,Pulp Fiction,Pulp Fiction,10.0,5.0,5,5,exact_title_year,1.0
+11152,American History X,American History X,9.0,4.5,4,5,exact_title_year,1.0
+11165,2001: A Space Odyssey,2001: A Space Odyssey,5.0,2.5,2,3,exact_title_year,1.0
+11283,Forrest Gump,Forrest Gump,8.0,4.0,4,4,exact_title_year,1.0
+11521,The Lord of the Rings: The Two Towers,Lord of the Rings: The Two Towers,10.0,5.0,5,5,exact_title_year,1.0
+11781,Indiana Jones and the Temple of Doom,Indiana Jones and the Temple of Doom,3.0,1.5,1,2,exact_title_year,1.0
+11812,Million Dollar Baby,Million Dollar Baby,10.0,5.0,5,5,exact_title_year,1.0
+12034,The Shining,The Shining,9.0,4.5,4,5,exact_title_year,1.0
+12155,Spider-Man 2,Spider-Man 2,7.0,3.5,3,4,exact_title_year,1.0
+12232,Lost in Translation,Lost in Translation,3.0,1.5,1,2,exact_title_year,1.0
+12293,The Godfather,The Godfather,10.0,5.0,5,5,exact_title_year,1.0
+12582,Mystic River,Mystic River,9.0,4.5,4,5,exact_title_year,1.0
+12870,Schindler's List,Schindler's List,10.0,5.0,5,5,exact_title_year,1.0
+13073,It's a Wonderful Life,It's a Wonderful Life,8.0,4.0,4,4,exact_title_year,1.0
+13593,Life Is Beautiful,Life Is Beautiful,10.0,5.0,5,5,exact_title_year,1.0
+13673,Toy Story,Toy Story,9.0,4.5,4,5,exact_title_year,1.0
+13707,Scarface,Scarface,3.0,1.5,1,2,exact_title_year,1.0
+13728,Gladiator,Gladiator,8.0,4.0,4,4,exact_title_year,1.0
+14240,The Lord of the Rings: The Return of the King,Lord of the Rings: The Return of the King,10.0,5.0,5,5,exact_title_year,1.0
+14312,Jurassic Park,Jurassic Park,9.0,4.5,4,5,exact_title_year,1.0
+14358,Monty Python and the Holy Grail,Monty Python and the Holy Grail,10.0,5.0,5,5,exact_title_year,1.0
+14454,Kill Bill: Vol. 1,Kill Bill: Vol. 1,10.0,5.0,5,5,exact_title_year,1.0
+14482,12 Monkeys,12 Monkeys,6.0,3.0,3,3,exact_title_year,1.0
+14571,Toy Story 2,Toy Story 2,10.0,5.0,5,5,exact_title_year,1.0
+14618,The Truman Show,The Truman Show,9.0,4.5,4,5,exact_title_year,1.0
+14691,The Matrix,The Matrix,7.0,3.5,3,4,exact_title_year,1.0
+14869,Blade Runner,Blade Runner,6.0,3.0,3,3,exact_title_year,1.0
+15205,The Day After Tomorrow,The Day After Tomorrow,4.0,2.0,2,2,exact_title_year,1.0
+15296,Band of Brothers,Band of Brothers,10.0,5.0,5,5,exact_title_year,1.0
+15366,The Thing,The Thing,5.0,2.5,2,3,exact_title_year,1.0
+15425,The Big Lebowski,The Big Lebowski,9.0,4.5,4,5,exact_title_year,1.0
+16265,Star Wars: Episode IV - A New Hope,Star Wars: Episode IV: A New Hope,10.0,5.0,5,5,exact_title_year,1.0
+16793,The Exorcist,The Exorcist,9.0,4.5,4,5,exact_title_year,1.0
+16879,Titanic,Titanic,9.0,4.5,4,5,exact_title_year,1.0
+16954,Indiana Jones and the Last Crusade,Indiana Jones and the Last Crusade,8.0,4.0,4,4,exact_title_year,1.0
+16969,Donnie Darko,Donnie Darko,8.0,4.0,4,4,exact_title_year,1.0
+17339,Full Metal Jacket,Full Metal Jacket,9.0,4.5,4,5,exact_title_year,1.0
+17508,Requiem for a Dream,Requiem for a Dream,10.0,5.0,5,5,exact_title_year,1.0

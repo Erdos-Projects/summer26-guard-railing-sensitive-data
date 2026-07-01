@@ -1,0 +1,251 @@
+user,imdb_title,imdb_year,imdb_rating,netflix_movie_id,netflix_title,netflix_year,match_method,match_score,expected_netflix_rating,rating_low,rating_high,preference
+planktonrules,The Shawshank Redemption,1994,10.0,,,,unmatched,0.7142857142857143,5.0,5,5,liked
+planktonrules,The Dark Knight,2008,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,Inception,2010,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Fight Club,1999,6.0,5926,Fight Club,1999.0,exact_title_year,1.0,3.0,3,3,neutral
+planktonrules,Interstellar,2014,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Forrest Gump,1994,8.0,11283,Forrest Gump,1994.0,exact_title_year,1.0,4.0,4,4,liked
+planktonrules,Pulp Fiction,1994,10.0,11064,Pulp Fiction,1994.0,exact_title_year,1.0,5.0,5,5,liked
+planktonrules,The Matrix,1999,7.0,14691,The Matrix,1999.0,exact_title_year,1.0,3.5,3,4,neutral
+planktonrules,The Godfather,1972,10.0,12293,The Godfather,1972.0,exact_title_year,1.0,5.0,5,5,liked
+planktonrules,The Lord of the Rings: The Fellowship of the Ring,2001,10.0,2452,Lord of the Rings: The Fellowship of the Ring,2001.0,exact_title_year,1.0,5.0,5,5,liked
+planktonrules,The Lord of the Rings: The Return of the King,2003,10.0,14240,Lord of the Rings: The Return of the King,2003.0,exact_title_year,1.0,5.0,5,5,liked
+planktonrules,Seven,1995,9.0,8596,Seven,1995.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,The Dark Knight Rises,2012,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,The Lord of the Rings: The Two Towers,2002,10.0,11521,Lord of the Rings: The Two Towers,2002.0,exact_title_year,1.0,5.0,5,5,liked
+planktonrules,Django Unchained,2012,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Gladiator,2000,8.0,13728,Gladiator,2000.0,exact_title_year,1.0,4.0,4,4,liked
+planktonrules,The Wolf of Wall Street,2013,5.0,,,,unmatched,0.0,2.5,2,3,neutral
+planktonrules,Inglourious Basterds,2009,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,The Silence of the Lambs,1991,7.0,2862,The Silence of the Lambs,1991.0,exact_title_year,1.0,3.5,3,4,neutral
+planktonrules,Batman Begins,2005,7.0,3864,Batman Begins,2005.0,exact_title_year,1.0,3.5,3,4,neutral
+planktonrules,Stranger Things,2016,10.0,,,,unmatched,0.0,5.0,5,5,liked
+planktonrules,Shutter Island,2010,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,The Prestige,2006,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,Schindler's List,1993,10.0,12870,Schindler's List,1993.0,exact_title_year,1.0,5.0,5,5,liked
+planktonrules,Star Wars: Episode IV - A New Hope,1977,10.0,16265,Star Wars: Episode IV: A New Hope,1977.0,exact_title_year,1.0,5.0,5,5,liked
+planktonrules,The Avengers,2012,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,The Departed,2006,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,Star Wars: Episode V - The Empire Strikes Back,1980,8.0,5582,Star Wars: Episode V: The Empire Strikes Back,1980.0,exact_title_year,1.0,4.0,4,4,liked
+planktonrules,Avatar,2009,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,The Godfather Part II,1974,10.0,,,,unmatched,0.6923076923076923,5.0,5,5,liked
+planktonrules,Back to the Future,1985,8.0,10820,Back to the Future,1985.0,exact_title_year,1.0,4.0,4,4,liked
+planktonrules,Memento,2000,8.0,5862,Memento,2000.0,exact_title_year,1.0,4.0,4,4,liked
+planktonrules,Titanic,1997,9.0,16879,Titanic,1997.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,GoodFellas,1990,4.0,,,,unmatched,0.5555555555555556,2.0,2,2,disliked
+planktonrules,The Truman Show,1998,9.0,14618,The Truman Show,1998.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,Guardians of the Galaxy,2014,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Léon: The Professional,1994,7.0,,,,unmatched,0.7272727272727273,3.5,3,4,neutral
+planktonrules,WALL·E,2008,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,Kill Bill: Vol. 1,2003,10.0,14454,Kill Bill: Vol. 1,2003.0,exact_title_year,1.0,5.0,5,5,liked
+planktonrules,Terminator 2: Judgment Day,1991,9.0,,,,unmatched,0.6037735849056604,4.5,4,5,liked
+planktonrules,American Beauty,1999,8.0,571,American Beauty,1999.0,exact_title_year,1.0,4.0,4,4,liked
+planktonrules,American History X,1998,9.0,11152,American History X,1998.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,The Lion King,1994,8.0,,,,unmatched,0.5714285714285714,4.0,4,4,liked
+planktonrules,Deadpool,2016,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,V for Vendetta,2005,9.0,,,,unmatched,0.5,4.5,4,5,liked
+planktonrules,Catch Me If You Can,2002,7.0,8644,Catch Me If You Can,2002.0,exact_title_year,1.0,3.5,3,4,neutral
+planktonrules,The Usual Suspects,1995,8.0,6974,The Usual Suspects,1995.0,exact_title_year,1.0,4.0,4,4,liked
+planktonrules,Up,2009,10.0,,,,unmatched,0.0,5.0,5,5,liked
+planktonrules,The Shining,1980,9.0,12034,The Shining,1980.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,Iron Man,2008,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,Good Will Hunting,1997,5.0,8904,Good Will Hunting,1997.0,exact_title_year,1.0,2.5,2,3,neutral
+planktonrules,Star Wars: Episode VI - Return of the Jedi,1983,8.0,9628,Star Wars: Episode VI: Return of the Jedi,1983.0,exact_title_year,1.0,4.0,4,4,liked
+planktonrules,Finding Nemo,2003,8.0,,,,unmatched,0.6857142857142857,4.0,4,4,liked
+planktonrules,Mad Max: Fury Road,2015,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,No Country for Old Men,2007,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Eternal Sunshine of the Spotless Mind,2004,8.0,1865,Eternal Sunshine of the Spotless Mind,2004.0,exact_title_year,1.0,4.0,4,4,liked
+planktonrules,Jurassic Park,1993,9.0,14312,Jurassic Park,1993.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,Toy Story,1995,9.0,13673,Toy Story,1995.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,Gone Girl,2014,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,Parasite,2019,6.0,,,,unmatched,0.0,3.0,3,3,neutral
+planktonrules,Reservoir Dogs,1992,9.0,175,Reservoir Dogs,1992.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,Braveheart,1995,7.0,2782,Braveheart,1995.0,exact_title_year,1.0,3.5,3,4,neutral
+planktonrules,Whiplash,2014,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,One Flew Over the Cuckoo's Nest,1975,10.0,8327,One Flew Over the Cuckoo's Nest,1975.0,exact_title_year,1.0,5.0,5,5,liked
+planktonrules,The Sixth Sense,1999,10.0,4306,The Sixth Sense,1999.0,exact_title_year,1.0,5.0,5,5,liked
+planktonrules,Raiders of the Lost Ark,1981,9.0,10042,Raiders of the Lost Ark,1981.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,The Hunger Games,2012,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,"Monsters, Inc.",2001,9.0,,,,unmatched,0.8,4.5,4,5,liked
+planktonrules,Alien,1979,10.0,,,,unmatched,0.5714285714285714,5.0,5,5,liked
+planktonrules,Dune: Part One,2021,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,A Beautiful Mind,2001,8.0,1180,A Beautiful Mind,2001.0,exact_title_year,1.0,4.0,4,4,liked
+planktonrules,Oppenheimer,2023,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Die Hard,1988,9.0,9960,Die Hard,1988.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,The Intouchables,2011,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Taxi Driver,1976,5.0,10774,Taxi Driver,1976.0,exact_title_year,1.0,2.5,2,3,neutral
+planktonrules,Star Wars: Episode VII - The Force Awakens,2015,10.0,,,,unmatched,0.0,5.0,5,5,liked
+planktonrules,Scarface,1983,3.0,13707,Scarface,1983.0,exact_title_year,1.0,1.5,1,2,disliked
+planktonrules,The Martian,2015,10.0,,,,unmatched,0.0,5.0,5,5,liked
+planktonrules,The Terminator,1984,10.0,6196,The Terminator,1984.0,exact_title_year,1.0,5.0,5,5,liked
+planktonrules,12 Angry Men,1957,10.0,9528,12 Angry Men,1957.0,exact_title_year,1.0,5.0,5,5,liked
+planktonrules,Snatch,2000,9.0,5924,Snatch,2000.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,Requiem for a Dream,2000,10.0,17508,Requiem for a Dream,2000.0,exact_title_year,1.0,5.0,5,5,liked
+planktonrules,Toy Story 3,2010,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,The Grand Budapest Hotel,2014,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Spirited Away,2001,9.0,,,,unmatched,0.5217391304347826,4.5,4,5,liked
+planktonrules,Captain America: The First Avenger,2011,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,Iron Man 3,2013,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,Thor,2011,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Once Upon a Time in... Hollywood,2019,6.0,,,,unmatched,0.0,3.0,3,3,neutral
+planktonrules,Ratatouille,2007,10.0,,,,unmatched,0.0,5.0,5,5,liked
+planktonrules,Iron Man 2,2010,5.0,,,,unmatched,0.0,2.5,2,3,neutral
+planktonrules,Prisoners,2013,10.0,,,,unmatched,0.0,5.0,5,5,liked
+planktonrules,A Clockwork Orange,1971,7.0,10451,A Clockwork Orange,1971.0,exact_title_year,1.0,3.5,3,4,neutral
+planktonrules,The Hangover,2009,3.0,,,,unmatched,0.0,1.5,1,2,disliked
+planktonrules,Star Wars: Episode III - Revenge of the Sith,2005,4.0,,,,unmatched,0.4536082474226804,2.0,2,2,disliked
+planktonrules,Inside Out,2015,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,The Big Lebowski,1998,9.0,15425,The Big Lebowski,1998.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,Donnie Darko,2001,8.0,16969,Donnie Darko,2001.0,exact_title_year,1.0,4.0,4,4,liked
+planktonrules,Black Panther,2018,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Slumdog Millionaire,2008,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,The Incredibles,2004,9.0,10947,The Incredibles,2004.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,Gravity,2013,10.0,,,,unmatched,0.0,5.0,5,5,liked
+planktonrules,How to Train Your Dragon,2010,10.0,,,,unmatched,0.0,5.0,5,5,liked
+planktonrules,"The Good, the Bad and the Ugly",1966,10.0,,,,unmatched,0.5,5.0,5,5,liked
+planktonrules,Black Swan,2010,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,Blade Runner,1982,6.0,14869,Blade Runner,1982.0,exact_title_year,1.0,3.0,3,3,neutral
+planktonrules,Knives Out,2019,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,I Am Legend,2007,6.0,,,,unmatched,0.0,3.0,3,3,neutral
+planktonrules,City of God,2002,9.0,6450,City of God,2002.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,Kill Bill: Vol. 2,2004,9.0,457,Kill Bill: Vol. 2,2004.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,Arrival,2016,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,Indiana Jones and the Last Crusade,1989,8.0,16954,Indiana Jones and the Last Crusade,1989.0,exact_title_year,1.0,4.0,4,4,liked
+planktonrules,Gran Torino,2008,10.0,,,,unmatched,0.0,5.0,5,5,liked
+planktonrules,Full Metal Jacket,1987,9.0,17339,Full Metal Jacket,1987.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,Aliens,1986,8.0,,,,unmatched,0.6,4.0,4,4,liked
+planktonrules,Amélie,2001,9.0,6029,Amelie,2001.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,Guardians of the Galaxy: Vol. 2,2017,6.0,,,,unmatched,0.0,3.0,3,3,neutral
+planktonrules,John Wick,2014,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,Get Out,2017,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,The Social Network,2010,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,Life Is Beautiful,1997,10.0,13593,Life Is Beautiful,1997.0,exact_title_year,1.0,5.0,5,5,liked
+planktonrules,Shrek,2001,9.0,,,,unmatched,0.6,4.5,4,5,liked
+planktonrules,Dunkirk,2017,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,Heat,1995,9.0,,,,unmatched,0.6666666666666666,4.5,4,5,liked
+planktonrules,Spider-Man: Into the Spider-Verse,2018,10.0,,,,unmatched,0.0,5.0,5,5,liked
+planktonrules,Fargo,1996,8.0,,,,unmatched,0.6666666666666666,4.0,4,4,liked
+planktonrules,12 Years a Slave,2013,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Spider-Man 2,2004,7.0,12155,Spider-Man 2,2004.0,exact_title_year,1.0,3.5,3,4,neutral
+planktonrules,Psycho,1960,10.0,10832,Psycho,1960.0,exact_title_year,1.0,5.0,5,5,liked
+planktonrules,2001: A Space Odyssey,1968,5.0,11165,2001: A Space Odyssey,1968.0,exact_title_year,1.0,2.5,2,3,neutral
+planktonrules,Kingsman: The Secret Service,2014,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,The Hunger Games: Catching Fire,2013,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,1917,2019,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,Skyfall,2012,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,Silver Linings Playbook,2012,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,Now You See Me,2013,6.0,,,,unmatched,0.0,3.0,3,3,neutral
+planktonrules,Apocalypse Now,1979,9.0,6099,Apocalypse Now,1979.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,Trainspotting,1996,3.0,,,,unmatched,0.5652173913043478,1.5,1,2,disliked
+planktonrules,The Amazing Spider-Man,2012,6.0,,,,unmatched,0.0,3.0,3,3,neutral
+planktonrules,Million Dollar Baby,2004,10.0,11812,Million Dollar Baby,2004.0,exact_title_year,1.0,5.0,5,5,liked
+planktonrules,La La Land,2016,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,Drive,2011,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,X-Men: First Class,2011,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Dune: Part Two,2024,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,Squid Game,2021,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,Rogue One: A Star Wars Story,2016,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,District 9,2009,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,Pan's Labyrinth,2006,6.0,,,,unmatched,0.0,3.0,3,3,neutral
+planktonrules,The Curious Case of Benjamin Button,2008,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Casino Royale,2006,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,Jaws,1975,9.0,798,Jaws,1975.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,Groundhog Day,1993,9.0,10225,Groundhog Day,1993.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,Wonder Woman,2017,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,The King's Speech,2010,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,Her,2013,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,Star Wars: Episode VIII - The Last Jedi,2017,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Frozen,2013,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,Coco,2017,10.0,,,,unmatched,0.0,5.0,5,5,liked
+planktonrules,There Will Be Blood,2007,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,Life of Pi,2012,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,It,2017,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,Birdman or (The Unexpected Virtue of Ignorance),2014,6.0,,,,unmatched,0.0,3.0,3,3,neutral
+planktonrules,Superbad,2007,1.0,,,,unmatched,0.0,1.0,1,1,disliked
+planktonrules,Into the Wild,2007,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,Rocky,1976,10.0,5571,Rocky,1976.0,exact_title_year,1.0,5.0,5,5,liked
+planktonrules,Barbie,2023,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,Tenet,2020,4.0,,,,unmatched,0.0,2.0,2,2,disliked
+planktonrules,Baby Driver,2017,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,12 Monkeys,1995,6.0,14482,12 Monkeys,1995.0,exact_title_year,1.0,3.0,3,3,neutral
+planktonrules,Zodiac,2007,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Toy Story 2,1999,10.0,14571,Toy Story 2,1999.0,exact_title_year,1.0,5.0,5,5,liked
+planktonrules,Nightcrawler,2014,10.0,,,,unmatched,0.0,5.0,5,5,liked
+planktonrules,Zombieland,2009,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Argo,2012,10.0,,,,unmatched,0.0,5.0,5,5,liked
+planktonrules,Captain Marvel,2019,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,L.A. Confidential,1997,6.0,9818,L.A. Confidential,1997.0,exact_title_year,1.0,3.0,3,3,neutral
+planktonrules,Casablanca,1942,10.0,,,,unmatched,0.5714285714285714,5.0,5,5,liked
+planktonrules,"Lock, Stock and Two Smoking Barrels",1998,9.0,,,,unmatched,0.4838709677419355,4.5,4,5,liked
+planktonrules,Everything Everywhere All at Once,2022,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,Bohemian Rhapsody,2018,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,21 Jump Street,2012,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,Shaun of the Dead,2004,8.0,4829,Shaun of the Dead,2004.0,exact_title_year,1.0,4.0,4,4,liked
+planktonrules,Zootopia,2016,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,Star Trek,2009,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Despicable Me,2010,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,The Pursuit of Happyness,2006,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,Casino,1995,9.0,,,,unmatched,0.625,4.5,4,5,liked
+planktonrules,Kick-Ass,2010,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,The Bourne Identity,2002,7.0,6037,The Bourne Identity,2002.0,exact_title_year,1.0,3.5,3,4,neutral
+planktonrules,"Three Billboards Outside Ebbing, Missouri",2017,6.0,,,,unmatched,0.0,3.0,3,3,neutral
+planktonrules,Monty Python and the Holy Grail,1975,10.0,14358,Monty Python and the Holy Grail,1975.0,exact_title_year,1.0,5.0,5,5,liked
+planktonrules,The Perks of Being a Wallflower,2012,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Band of Brothers,2001,10.0,15296,Band of Brothers,2001.0,exact_title_year,1.0,5.0,5,5,liked
+planktonrules,Rain Man,1988,8.0,4640,Rain Man,1988.0,exact_title_year,1.0,4.0,4,4,liked
+planktonrules,Source Code,2011,10.0,,,,unmatched,0.0,5.0,5,5,liked
+planktonrules,Kung Fu Panda,2008,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,Love Actually,2003,8.0,4472,Love Actually,2003.0,exact_title_year,1.0,4.0,4,4,liked
+planktonrules,Ford v Ferrari,2019,6.0,,,,unmatched,0.0,3.0,3,3,neutral
+planktonrules,Juno,2007,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,Charlie and the Chocolate Factory,2005,9.0,,,,unmatched,0.5396825396825397,4.5,4,5,liked
+planktonrules,Indiana Jones and the Temple of Doom,1984,3.0,11781,Indiana Jones and the Temple of Doom,1984.0,exact_title_year,1.0,1.5,1,2,disliked
+planktonrules,Rear Window,1954,9.0,6739,Rear Window,1954.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,X-Men Origins: Wolverine,2009,4.0,,,,unmatched,0.0,2.0,2,2,disliked
+planktonrules,Hot Fuzz,2007,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,Children of Men,2006,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,The Incredible Hulk,2008,6.0,,,,unmatched,0.0,3.0,3,3,neutral
+planktonrules,The Maze Runner,2014,3.0,,,,unmatched,0.0,1.5,1,2,disliked
+planktonrules,Rush,2013,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,Little Miss Sunshine,2006,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Pacific Rim,2013,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Big Hero 6,2014,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,Top Gun,1986,3.0,7624,Top Gun,1986.0,exact_title_year,1.0,1.5,1,2,disliked
+planktonrules,It's a Wonderful Life,1946,8.0,13073,It's a Wonderful Life,1946.0,exact_title_year,1.0,4.0,4,4,liked
+planktonrules,Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb,1964,10.0,,,,unmatched,0.37894736842105264,5.0,5,5,liked
+planktonrules,Dark,2017,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,Dallas Buyers Club,2013,6.0,,,,unmatched,0.0,3.0,3,3,neutral
+planktonrules,The Hunger Games: Mockingjay - Part 1,2014,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Tangled,2010,10.0,,,,unmatched,0.0,5.0,5,5,liked
+planktonrules,The Fifth Element,1997,9.0,9882,The Fifth Element,1997.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,Star Wars: Episode IX - The Rise of Skywalker,2019,5.0,,,,unmatched,0.0,2.5,2,3,neutral
+planktonrules,The Big Short,2015,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Cars,2006,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Spotlight,2015,10.0,,,,unmatched,0.0,5.0,5,5,liked
+planktonrules,Spider-Man: Across the Spider-Verse,2023,4.0,,,,unmatched,0.0,2.0,2,2,disliked
+planktonrules,Lost in Translation,2003,3.0,12232,Lost in Translation,2003.0,exact_title_year,1.0,1.5,1,2,disliked
+planktonrules,Warrior,2011,6.0,,,,unmatched,0.0,3.0,3,3,neutral
+planktonrules,The Help,2011,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,The Thing,1982,5.0,15366,The Thing,1982.0,exact_title_year,1.0,2.5,2,3,neutral
+planktonrules,Glass Onion,2022,6.0,,,,unmatched,0.0,3.0,3,3,neutral
+planktonrules,Mystic River,2003,9.0,12582,Mystic River,2003.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,American Hustle,2013,7.0,,,,unmatched,0.0,3.5,3,4,neutral
+planktonrules,Divergent,2014,5.0,,,,unmatched,0.0,2.5,2,3,neutral
+planktonrules,Training Day,2001,8.0,1102,Training Day,2001.0,exact_title_year,1.0,4.0,4,4,liked
+planktonrules,Mission: Impossible,1996,1.0,5054,Mission: Impossible,1996.0,exact_title_year,1.0,1.0,1,1,disliked
+planktonrules,Howl's Moving Castle,2004,8.0,,,,unmatched,0.5333333333333333,4.0,4,4,liked
+planktonrules,Indiana Jones and the Kingdom of the Crystal Skull,2008,6.0,,,,unmatched,0.0,3.0,3,3,neutral
+planktonrules,The Day After Tomorrow,2004,4.0,15205,The Day After Tomorrow,2004.0,exact_title_year,1.0,2.0,2,2,disliked
+planktonrules,Moneyball,2011,5.0,,,,unmatched,0.0,2.5,2,3,neutral
+planktonrules,Star Trek Into Darkness,2013,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,Gangs of New York,2002,5.0,10730,Gangs of New York,2002.0,exact_title_year,1.0,2.5,2,3,neutral
+planktonrules,Beauty and the Beast,1991,10.0,,,,unmatched,0.7142857142857143,5.0,5,5,liked
+planktonrules,Jumanji: Welcome to the Jungle,2017,8.0,,,,unmatched,0.0,4.0,4,4,liked
+planktonrules,The Menu,2022,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,The 40-Year-Old Virgin,2005,6.0,,,,unmatched,0.46511627906976744,3.0,3,3,neutral
+planktonrules,Aladdin,1992,7.0,,,,unmatched,0.5714285714285714,3.5,3,4,neutral
+planktonrules,Wreck-It Ralph,2012,6.0,,,,unmatched,0.0,3.0,3,3,neutral
+planktonrules,The Exorcist,1973,9.0,16793,The Exorcist,1973.0,exact_title_year,1.0,4.5,4,5,liked
+planktonrules,Quantum of Solace,2008,5.0,,,,unmatched,0.0,2.5,2,3,neutral
+planktonrules,Spectre,2015,9.0,,,,unmatched,0.0,4.5,4,5,liked
+planktonrules,Scott Pilgrim vs. the World,2010,9.0,,,,unmatched,0.0,4.5,4,5,liked

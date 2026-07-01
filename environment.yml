@@ -1,0 +1,16 @@
+name: erdos_project_environment
+channels:
+  - conda-forge
+dependencies:
+  - python = 3.12
+  - pip >= 24.0
+  - beautifulsoup4 >= 4.12
+  - jupyter >= 1.1
+  - matplotlib >= 3.8
+  - numpy >= 2.0
+  - pandas >= 2.0
+  - requests >= 2.32
+  - scipy >= 1.13
+  - seaborn >= 0.13
+  - pip:
+      - -e .

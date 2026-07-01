@@ -1,0 +1,28 @@
+release_name,knowledge_cols,n_known,avg_candidate_size,median_candidate_size,pct_unique,pct_5_or_less,pct_10_or_less,avg_surety_pct,median_surety_pct,trials
+k_suppress_movie_rating_month_k5,movie_id + rating + month,1,15.5,15.5,0.0,0.0,0.0,7.045454545454546,7.045454545454546,2
+add_rating_noise,movie_id + rating_noisy + month,1,16.0,16.0,0.0,50.0,50.0,18.390804597701152,18.390804597701152,2
+original_movie_rating_month,movie_id + rating + month,1,17.5,17.5,0.0,50.0,50.0,26.515151515151516,26.515151515151516,2
+remove_rare_movies_min_10,movie_id + rating + month,1,17.5,17.5,0.0,50.0,50.0,26.515151515151516,26.515151515151516,2
+coarsen_rating,movie_id + rating_bucket + month,1,24.5,24.5,0.0,50.0,50.0,11.136363636363637,11.136363636363637,2
+year_only,movie_id + rating + year,1,165.0,165.0,0.0,0.0,0.0,1.9512771996215705,1.9512771996215705,2
+remove_month,movie_id + rating,1,474.0,474.0,0.0,0.0,0.0,0.7420743639921722,0.7420743639921722,2
+remove_month_and_coarsen_rating,movie_id + rating_bucket,1,729.0,729.0,0.0,0.0,0.0,0.26182335363751297,0.26182335363751297,2
+movie_only,movie_id,1,2012.0,2012.0,0.0,0.0,0.0,0.04970178926441352,0.04970178926441352,2
+add_rating_noise,movie_id + rating_noisy + month,2,1.0,1.0,100.0,100.0,100.0,100.0,100.0,2
+coarsen_rating,movie_id + rating_bucket + month,2,1.0,1.0,100.0,100.0,100.0,100.0,100.0,2
+k_suppress_movie_rating_month_k5,movie_id + rating + month,2,1.0,1.0,100.0,100.0,100.0,100.0,100.0,2
+original_movie_rating_month,movie_id + rating + month,2,1.0,1.0,100.0,100.0,100.0,100.0,100.0,2
+remove_rare_movies_min_10,movie_id + rating + month,2,1.0,1.0,100.0,100.0,100.0,100.0,100.0,2
+year_only,movie_id + rating + year,2,2.5,2.5,50.0,100.0,100.0,62.5,62.5,2
+remove_month,movie_id + rating,2,3.0,3.0,0.0,100.0,100.0,37.5,37.5,2
+remove_month_and_coarsen_rating,movie_id + rating_bucket,2,4.0,4.0,0.0,100.0,100.0,26.666666666666668,26.666666666666668,2
+movie_only,movie_id,2,22.5,22.5,0.0,0.0,0.0,4.554655870445345,4.554655870445345,2
+add_rating_noise,movie_id + rating_noisy + month,3,1.0,1.0,100.0,100.0,100.0,100.0,100.0,2
+coarsen_rating,movie_id + rating_bucket + month,3,1.0,1.0,100.0,100.0,100.0,100.0,100.0,2
+k_suppress_movie_rating_month_k5,movie_id + rating + month,3,1.0,1.0,100.0,100.0,100.0,100.0,100.0,2
+original_movie_rating_month,movie_id + rating + month,3,1.0,1.0,100.0,100.0,100.0,100.0,100.0,2
+remove_rare_movies_min_10,movie_id + rating + month,3,1.0,1.0,100.0,100.0,100.0,100.0,100.0,2
+year_only,movie_id + rating + year,3,1.0,1.0,100.0,100.0,100.0,100.0,100.0,2
+remove_month,movie_id + rating,3,3.0,3.0,0.0,100.0,100.0,37.5,37.5,2
+remove_month_and_coarsen_rating,movie_id + rating_bucket,3,5.5,5.5,0.0,50.0,100.0,22.916666666666668,22.916666666666668,2
+movie_only,movie_id,3,8.5,8.5,0.0,0.0,50.0,12.878787878787879,12.878787878787879,2

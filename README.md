@@ -1,215 +1,174 @@
-# Differential Privacy and Data Anonymization: A Red Team / Blue Team Study
+# Netflix Prize Privacy Red-Team / Blue-Team Study
 
-## Project Overview
+This project studies the privacy-utility tradeoff in the Netflix Prize dataset.
+It now has a concrete direction:
 
-The goal of this project is to study the tradeoff between privacy and utility when releasing sensitive datasets. Organizations often wish to share data with researchers or the public, but doing so creates the risk that individuals may be identified or that sensitive information may be inferred. While techniques such as anonymization and differential privacy are intended to reduce these risks, they can also reduce the usefulness of the released data.
+1. Use public IMDb user ratings as auxiliary information.
+2. Match those ratings to Netflix Prize movie ids.
+3. Run a probabilistic record-linkage attack against anonymous Netflix customer
+   ids.
+4. Create anonymized Netflix releases by removing/generalizing dates,
+   coarsening ratings, adding noise, suppressing low-k facts, and removing rare
+   movies.
+5. Compare privacy risk with k-anonymity and sampled linkage attacks.
+6. Compare utility by training the same rating-prediction baseline on original
+   and anonymized releases and measuring RMSE on true ratings.
 
-Rather than focusing solely on predictive performance, this project will evaluate privacy mechanisms from both a defender's and an attacker's perspective. The project is inspired by the common red team / blue team framework used in cybersecurity.
+The old notebooks are still present as historical exploration, but the
+maintained implementation lives in `src/guardrails_sensitive_data`.
 
-The blue team is responsible for releasing a useful version of a dataset while protecting the privacy of individuals. The red team is responsible for attempting to recover sensitive information or identify individuals using the released data.
+## Ethical Scope
 
-The central question is:
+This repository is for a data privacy course/project. Run linkage attacks only
+on public IMDb profiles used for demonstration, and do not publish or contact
+candidate real-world identities. The purpose is to quantify privacy risk and
+evaluate defenses.
 
-**How much utility can be preserved while preventing realistic privacy attacks?**
+## Data
 
-## Potential Datasets
+The Netflix Prize data is not redistributed here. Place the official files in
+`data/netflix/`:
 
-Several datasets are being considered.
+- `combined_data_1.txt`
+- `combined_data_2.txt`
+- `combined_data_3.txt`
+- `combined_data_4.txt`
+- `movie_titles.csv` or `movie_titles.txt`
+- `probe.txt` for official holdout evaluation
 
-### Adult Income Dataset
+This workspace already has the Netflix files locally, so normal commands can
+run without downloading anything.
 
-The Adult Income dataset from the UCI Machine Learning Repository contains demographic and socioeconomic information such as age, education, occupation, marital status, race, sex, and income category.
+Verify the local data:
 
-**Advantages:**
-- Widely used benchmark dataset.
-- Contains sensitive demographic information.
-- Supports machine learning experiments.
-- Suitable for re-identification and membership inference studies.
+```bash
+python main.py verify-data --require-probe
+```
 
-### Diabetes 130-US Hospitals Dataset
+If you have an authorized archive URL or local archive:
 
-This dataset contains patient-level hospital records and readmission outcomes.
+```bash
+python main.py download-netflix --url "https://example.com/authorized/netflix.zip"
+python main.py download-netflix --archive /path/to/netflix.zip
+```
 
-**Advantages:**
-- Strong privacy motivation.
-- Healthcare data is a major application area for privacy-preserving analysis.
-- Membership inference attacks have clear real-world implications.
+## Environment
 
-### Credit Card Default Dataset
+Using conda:
 
-This dataset contains customer financial information and loan default outcomes.
+```bash
+conda env create -f environment.yml
+conda activate erdos_project_environment
+```
 
-**Advantages:**
-- Sensitive financial attributes.
-- Supports classification tasks.
-- Natural setting for studying privacy risks in financial data.
+Or with pip:
 
-At present, the Adult Income dataset appears to be the strongest candidate because it supports all proposed experiments while remaining manageable in size.
+```bash
+python -m pip install -e .
+```
 
-## Stakeholders
+The CLI works from the repository root even before installation:
 
-The project is relevant to several groups:
+```bash
+python main.py --help
+```
 
-- Organizations releasing data for research purposes.
-- Researchers who rely on access to high-quality datasets.
-- Individuals whose records appear in released datasets.
-- Policymakers and regulators concerned with privacy protection.
+After installation, the same commands are available as:
 
-## Unit of Analysis
+```bash
+netflix-privacy --help
+```
 
-The unit of analysis will generally be an individual record.
+## IMDb Ratings
 
-Examples include:
-- One individual in the Adult Income dataset.
-- One patient encounter in the Diabetes dataset.
-- One customer in the Credit Card dataset.
+The cached exploratory file `notebooks/imdb_data.csv` includes ratings for
+`planktonrules` and other public IMDb users. Use that for reproducible runs:
 
-Differential privacy is naturally defined at the level of an individual record, making these datasets suitable for analysis.
+```bash
+python main.py linkage-attack --user planktonrules
+```
 
-## Blue Team Objectives
+To fetch a public IMDb ratings page into a CSV, supply a user id or, preferably,
+the full `/ratings` URL:
 
-The blue team's goal is to release a useful version of the data while reducing privacy risks.
+```bash
+python main.py scrape-imdb \
+  --user planktonrules \
+  --ratings-url "https://www.imdb.com/user/urXXXXXXXX/ratings" \
+  --output reports/imdb_planktonrules.csv
+```
 
-Potential privacy-preserving approaches include:
-- Removal of direct identifiers.
-- Generalization of attributes.
-- Suppression of rare values.
-- k-anonymity.
-- l-diversity.
-- Differential privacy.
-- Differentially private synthetic data generation.
+IMDb markup changes often and may require login or JavaScript. Cached CSVs are
+the reliable research path.
 
-The blue team will attempt to maximize utility while maintaining acceptable privacy guarantees.
+## Experiments
 
-## Red Team Objectives
+Run the probabilistic linkage attack:
 
-The red team's goal is to determine how much information can be recovered from the released dataset.
+```bash
+python main.py linkage-attack --user planktonrules --top-n 50
+```
 
-Possible attacks include:
+Outputs:
 
-### Re-identification Attacks
+- `reports/linkage_planktonrules_matched_titles.csv`
+- `reports/linkage_planktonrules_facts.csv`
+- `reports/linkage_planktonrules_candidates.csv`
 
-Attempt to identify individuals using combinations of quasi-identifiers such as age, sex, occupation, or geographic information.
+Evaluate anonymization defenses:
 
-### Membership Inference Attacks
+```bash
+python main.py privacy-eval --max-rows 1000000 --trials 300
+```
 
-Attempt to determine whether a specific individual was included in a training dataset.
+Outputs:
 
-### Attribute Inference Attacks
+- `reports/privacy_k_anonymity_summary.csv`
+- `reports/privacy_linkage_trials.csv`
+- `reports/privacy_linkage_summary.csv`
 
-Attempt to infer sensitive attributes that were not directly released.
+Compare downstream RMSE:
 
-The effectiveness of these attacks will be used as a measure of privacy risk.
+```bash
+python main.py rmse-eval --max-rows 1000000
+```
 
-## Project Directions
+For the official probe holdout, use:
 
-Several experimental directions are possible.
+```bash
+python main.py rmse-eval --holdout probe --max-train-rows 5000000 --max-probe-rows 100000
+```
 
-### Option 1: Differentially Private Machine Learning
+The default RMSE path uses a random holdout from a sampled subset, which is much
+faster and is enough to compare releases consistently.
 
-Train machine learning models with varying privacy budgets and compare their performance against standard models.
+Run a small end-to-end demo:
 
-**Potential models:**
-- Logistic Regression
-- Random Forest
-- Differentially Private Logistic Regression
-- Differentially Private SGD
+```bash
+python main.py run-demo --max-rows 200000 --trials 50
+```
 
-**Metrics:**
-- Accuracy
-- F1 Score
-- Privacy budget (epsilon)
+## Release Variants
 
-### Option 2: Differentially Private Synthetic Data
+The blue-team releases currently evaluated are:
 
-Generate synthetic datasets using differential privacy techniques and evaluate how closely they resemble the original dataset.
+- original movie + exact rating + month
+- remove month
+- generalize month to year
+- coarsen rating into disliked / neutral / liked
+- remove month and coarsen rating
+- add bounded rating noise
+- remove rare movies
+- suppress low-k movie/rating/month facts
+- movie only
 
-**Metrics:**
-- Distribution preservation
-- Correlation preservation
-- Downstream model performance
-- Privacy budget (epsilon)
+`movie_only` is useful for privacy comparison but is skipped for RMSE because it
+does not release rating labels.
 
-### Option 3: Red Team / Blue Team Evaluation
+## Tests
 
-Compare multiple privacy mechanisms under active attack.
+```bash
+python -m unittest discover
+```
 
-**Potential release methods:**
-- Original dataset
-- Basic anonymization
-- k-anonymity
-- Differential privacy
-- Differentially private synthetic data
-
-**Potential attack metrics:**
-- Re-identification success rate
-- Membership inference success rate
-- Attribute inference success rate
-
-This option provides the most direct evaluation of privacy protection.
-
-## Data Assessment
-
-The candidate datasets contain sufficient observations for machine learning and privacy experiments.
-
-- Adult Income contains approximately 49,000 observations and 14 features.
-- The Credit Card Default dataset contains approximately 30,000 observations.
-- The Diabetes dataset contains over 100,000 records.
-
-Potential sources of bias and representativeness issues will be examined during exploratory analysis.
-
-## Learnability Assessment
-
-Before implementing privacy-preserving methods, baseline models will be trained to establish whether meaningful predictive signal exists in the data.
-
-**Baseline models include:**
-- DummyClassifier
-- Logistic Regression
-- Random Forest
-
-Cross-validation will be used to evaluate performance.
-
-If predictive models substantially outperform trivial baselines, the prediction task will be considered learnable.
-
-## Privacy Threat Model
-
-The project assumes an adversary with access to released datasets and potentially some auxiliary information.
-
-The adversary may attempt to:
-- Determine whether an individual participated in the dataset.
-- Re-identify specific individuals.
-- Infer sensitive information from released records.
-
-The effectiveness of privacy-preserving mechanisms will be evaluated against these attack models.
-
-## Key Performance Indicators
-
-### Utility Metrics
-- Accuracy
-- F1 Score
-- Statistical estimation error
-- Distribution similarity
-- Correlation preservation
-
-### Privacy Metrics
-- Privacy budget (epsilon)
-- Re-identification rate
-- Membership inference attack success rate
-- Attribute inference attack success rate
-
-### Computational Metrics
-- Runtime
-- Memory usage
-- Training cost
-
-## Expected Deliverables
-
-- README describing the problem and datasets.
-- Data acquisition and preprocessing scripts.
-- Baseline modeling notebook.
-- Privacy-preserving data release experiments.
-- Red team attack implementations.
-- Results tables and visualizations.
-- Final report discussing privacy-utility tradeoffs and attack outcomes.
-
-At the conclusion of the project, we hope to identify which privacy-preserving techniques provide the best balance between data utility and resistance to realistic attacks.
+The tests use tiny synthetic Netflix files and do not require the full dataset.
