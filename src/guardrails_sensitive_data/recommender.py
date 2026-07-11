@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd
 
 from .anonymization import make_releases, normalize_rating_frame
-from .netflix_io import iter_combined_ratings, netflix_paths, read_probe
+from .data import iter_combined_ratings, netflix_paths, read_probe
 
 
 @dataclass
@@ -87,6 +87,95 @@ def mae(actual: np.ndarray | pd.Series, predicted: np.ndarray | pd.Series) -> fl
     return float(np.mean(np.abs(actual_array - predicted_array)))
 
 
+def sampled_ranking_metrics(
+    model: BiasRecommender,
+    train: pd.DataFrame,
+    test: pd.DataFrame,
+    *,
+    k: int = 10,
+    negatives_per_user: int = 50,
+    max_users: int = 500,
+    seed: int = 333,
+) -> dict[str, float]:
+    """Estimate hit-rate and NDCG with sampled negative movies."""
+
+    if k <= 0 or negatives_per_user <= 0 or max_users <= 0:
+        raise ValueError("k, negatives_per_user, and max_users must be positive.")
+
+    train_data = normalize_rating_frame(train)
+    test_data = normalize_rating_frame(test)
+    positives = test_data[test_data["rating"] >= 4]
+    if positives.empty:
+        return {
+            "ranking_users": 0.0,
+            "ranking_k": float(k),
+            "ranking_negatives_per_user": float(negatives_per_user),
+            "hit_rate_at_k": np.nan,
+            "ndcg_at_k": np.nan,
+        }
+
+    rng = np.random.default_rng(seed)
+    known_movies = model.movie_index.to_numpy(dtype=np.int32)
+    known_movie_set = set(map(int, known_movies))
+    known_user_set = set(map(int, model.user_index.to_numpy(dtype=np.int32)))
+    train_seen = train_data.groupby("customer_id")["movie_id"].agg(lambda values: set(map(int, values))).to_dict()
+    positive_groups = dict(tuple(positives.groupby("customer_id", sort=False)))
+    users = np.array([int(user) for user in positive_groups if int(user) in known_user_set], dtype=np.int32)
+    rng.shuffle(users)
+
+    hits: list[float] = []
+    ndcgs: list[float] = []
+    for user_id in users[:max_users]:
+        user_positives = positive_groups[int(user_id)]
+        candidate_positive_movies = [
+            int(movie_id)
+            for movie_id in user_positives["movie_id"].to_numpy()
+            if int(movie_id) in known_movie_set
+        ]
+        if not candidate_positive_movies:
+            continue
+
+        positive_movie = int(rng.choice(candidate_positive_movies))
+        unavailable = set(train_seen.get(int(user_id), set()))
+        unavailable.update(map(int, user_positives["movie_id"].to_numpy()))
+        negative_pool = np.array([movie_id for movie_id in known_movies if int(movie_id) not in unavailable], dtype=np.int32)
+        if len(negative_pool) == 0:
+            continue
+
+        sample_size = min(negatives_per_user, len(negative_pool))
+        negatives = rng.choice(negative_pool, size=sample_size, replace=False)
+        eval_movies = np.concatenate([[positive_movie], negatives.astype(np.int32)])
+        eval_frame = pd.DataFrame(
+            {
+                "customer_id": np.full(len(eval_movies), int(user_id), dtype=np.int32),
+                "movie_id": eval_movies.astype(np.int32),
+                "rating": np.zeros(len(eval_movies), dtype=np.int8),
+            }
+        )
+        scores = model.predict(eval_frame)
+        positive_score = float(scores[0])
+        rank = int(1 + np.sum(scores[1:] > positive_score))
+        hits.append(float(rank <= k))
+        ndcgs.append(float(1 / np.log2(rank + 1)) if rank <= k else 0.0)
+
+    if not hits:
+        return {
+            "ranking_users": 0.0,
+            "ranking_k": float(k),
+            "ranking_negatives_per_user": float(negatives_per_user),
+            "hit_rate_at_k": np.nan,
+            "ndcg_at_k": np.nan,
+        }
+
+    return {
+        "ranking_users": float(len(hits)),
+        "ranking_k": float(k),
+        "ranking_negatives_per_user": float(negatives_per_user),
+        "hit_rate_at_k": float(np.mean(hits) * 100),
+        "ndcg_at_k": float(np.mean(ndcgs)),
+    }
+
+
 def train_test_split_ratings(
     frame: pd.DataFrame,
     test_fraction: float = 0.2,
@@ -112,8 +201,11 @@ def compare_release_rmse(
     regularization: float = 10.0,
     rare_movie_min_users: int = 500,
     k_suppression: int = 5,
+    ranking_k: int = 10,
+    ranking_negatives_per_user: int = 50,
+    ranking_max_users: int = 500,
 ) -> pd.DataFrame:
-    """Train the same recommender on each release and evaluate true test RMSE."""
+    """Train the same recommender on each release and evaluate utility."""
 
     releases = make_releases(
         train,
@@ -134,6 +226,11 @@ def compare_release_rmse(
                     "test_rows": len(test),
                     "rmse": np.nan,
                     "mae": np.nan,
+                    "ranking_users": 0,
+                    "ranking_k": ranking_k,
+                    "ranking_negatives_per_user": ranking_negatives_per_user,
+                    "hit_rate_at_k": np.nan,
+                    "ndcg_at_k": np.nan,
                     "status": "skipped_no_rating_labels",
                 }
             )
@@ -149,6 +246,11 @@ def compare_release_rmse(
                     "test_rows": len(test),
                     "rmse": np.nan,
                     "mae": np.nan,
+                    "ranking_users": 0,
+                    "ranking_k": ranking_k,
+                    "ranking_negatives_per_user": ranking_negatives_per_user,
+                    "hit_rate_at_k": np.nan,
+                    "ndcg_at_k": np.nan,
                     "status": "skipped_empty_training_set",
                 }
             )
@@ -161,6 +263,15 @@ def compare_release_rmse(
             regularization=regularization,
         )
         predicted = model.predict(test)
+        ranking = sampled_ranking_metrics(
+            model,
+            train_release,
+            test,
+            k=ranking_k,
+            negatives_per_user=ranking_negatives_per_user,
+            max_users=ranking_max_users,
+            seed=seed,
+        )
         rows.append(
             {
                 "release_name": release.name,
@@ -170,6 +281,7 @@ def compare_release_rmse(
                 "global_mean": model.global_mean,
                 "rmse": rmse(actual, predicted),
                 "mae": mae(actual, predicted),
+                **ranking,
                 "status": "ok",
             }
         )

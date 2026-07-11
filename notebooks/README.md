@@ -20,6 +20,12 @@ Optional notebook ML dependencies:
 python -m pip install -e ".[ml]"
 ```
 
+Optional runtime IMDb scraping dependencies:
+
+```bash
+python -m pip install -e ".[scrape]"
+```
+
 Equivalent direct install:
 
 ```bash
@@ -29,14 +35,26 @@ python -m pip install "scikit-learn>=1.9,<2.0" "sdv>=1.37,<2.0" "pyspark[sql]>=4
 PySpark also needs Java 17 or later with `JAVA_HOME` set.
 
 The notebooks in `old/` are historical exploration. The maintained package path
-is the CLI in `src/guardrails_sensitive_data`:
+is the simplified CLI in `src/guardrails_sensitive_data`:
 
 ```bash
 python main.py verify-data --require-probe
 python main.py linkage-attack --user planktonrules
+python main.py linkage-attack --user new_reviewer --ratings-url "https://www.imdb.com/user/p.example/ratings"
+python main.py linkage-attack --user "https://www.imdb.com/user/p.example/ratings" --imdb-fetch-method browser --imdb-browser-headed
 python main.py privacy-eval --max-rows 1000000
 python main.py rmse-eval --max-rows 1000000
+python main.py run-demo --synthetic
 ```
+
+`linkage-attack` checks `notebooks/imdb_data.csv` first. If the requested IMDb
+user is missing and scraping is enabled, it attempts a best-effort runtime scrape
+from the supplied username, user id, or `--ratings-url`. The default
+`--imdb-fetch-method auto` tries HTTP first and falls back to Selenium/Chrome
+when `.[scrape]` is installed. Use `--imdb-fetch-method browser
+--imdb-browser-headed` to mirror the old notebook workflow more closely. The
+CLI prints warnings when IMDb scraping fails, profile age cannot be detected, or
+the profile appears to post-date the 2006 Netflix Prize data window.
 
 Use notebooks for presentation and visualization, but prefer adding reusable
 logic to the package.

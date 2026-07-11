@@ -1,0 +1,27 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+*$py.class
+
+.venv/
+.env
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+data/
+*.egg-info/
+build/
+dist/
+
+notebooks/imdb_data.csv
+notebooks/imdb_scrape_test.ipynb
+notebooks/old/*.csv
+notebooks/old/Income Dataset Prelim.ipynb
+
+reports/*.csv
+reports/*.png
+reports/*.md
+!reports/.gitkeep
+!reports/README.md

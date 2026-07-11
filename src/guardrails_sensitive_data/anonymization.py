@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import hashlib
 from typing import Iterable
 
 import numpy as np
@@ -10,6 +11,7 @@ import pandas as pd
 
 
 MISSING_KEY = "__missing__"
+DEFAULT_HASH_SALT = "guardrails-sensitive-data-public-output"
 
 
 @dataclass(frozen=True)
@@ -19,6 +21,37 @@ class ReleaseData:
     knowledge_cols: tuple[str, ...]
     rating_col: str | None
     description: str
+
+
+def stable_id_hash(value: object, *, salt: str = DEFAULT_HASH_SALT, prefix: str = "user") -> str:
+    """Return a stable, non-reversible short hash for an identifier."""
+
+    digest = hashlib.sha256(f"{salt}:{value}".encode("utf-8")).hexdigest()[:12]
+    return f"{prefix}_{digest}"
+
+
+def redact_customer_ids(
+    frame: pd.DataFrame,
+    *,
+    column: str = "customer_id",
+    hashed_column: str = "customer_hash",
+    drop_original: bool = True,
+    salt: str = DEFAULT_HASH_SALT,
+) -> pd.DataFrame:
+    """Replace a raw customer id column with stable hashes."""
+
+    data = frame.copy()
+    if column not in data.columns:
+        return data
+
+    insert_at = data.columns.get_loc(column)
+    hashes = data[column].map(lambda value: stable_id_hash(value, salt=salt))
+    if drop_original:
+        data = data.drop(columns=[column])
+        data.insert(insert_at, hashed_column, hashes)
+    else:
+        data.insert(insert_at + 1, hashed_column, hashes)
+    return data
 
 
 def normalize_rating_frame(frame: pd.DataFrame) -> pd.DataFrame:
@@ -270,7 +303,7 @@ def evaluate_release_linkage_risk(
                     "release_name": release.name,
                     "knowledge_cols": " + ".join(cols),
                     "n_known": n_known,
-                    "target_user": target_user,
+                    "target_user_hash": stable_id_hash(target_user),
                     "candidate_count": candidate_count,
                     "unique": candidate_count == 1,
                     "surety_pct": 100 / candidate_count if candidate_count > 0 else 0,

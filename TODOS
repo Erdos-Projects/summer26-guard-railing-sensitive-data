@@ -1,6 +1,15 @@
-## 1
-Do the synthetic dataset for rmse eval as well
+## Current Focus
 
-## 2
-Do better/more web sraping at runtime once we take a user from command line
+- Keep the maintained package small: `data`, `anonymization`, `linkage`,
+  `recommender`, `reporting`, and `cli`.
+- Prefer improving the synthetic demo and final report over adding new modules.
+- Treat old notebooks as historical unless a piece is deliberately promoted
+  into `src/guardrails_sensitive_data`.
 
+## Later, If Needed
+
+- Add confidence intervals across multiple seeds.
+- Promote the Spark ALS notebook into the package only if the lightweight bias
+  recommender is no longer enough.
+- If runtime IMDb scraping proves brittle, add a small documented cache-refresh
+  workflow that writes reviewed scrape outputs back to `notebooks/imdb_data.csv`.

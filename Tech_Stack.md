@@ -7,9 +7,8 @@ experiment.
 
 - Python 3.12+
 - pandas and NumPy for data processing
-- SciPy-compatible numerical stack
-- requests plus BeautifulSoup for lightweight IMDb scraping
-- Matplotlib and Seaborn for optional notebook/report plots
+- Matplotlib for report plots
+- Optional notebook stack: Jupyter, Seaborn, SDV, scikit-learn, and PySpark
 
 ## Project Interface
 
@@ -31,3 +30,12 @@ experiment.
 The default utility model is a regularized user/movie bias recommender. It is
 much faster than the exploratory Spark/ALS notebook and is sufficient for
 comparing anonymized releases against the original release.
+
+## Maintained Source Modules
+
+- `data.py`
+- `anonymization.py`
+- `linkage.py`
+- `recommender.py`
+- `reporting.py`
+- `cli.py`

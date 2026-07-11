@@ -1,38 +1,74 @@
-# Netflix Prize Privacy Red-Team / Blue-Team Study
+# Netflix Prize Privacy-Utility Audit
 
-This project studies the privacy-utility tradeoff in the Netflix Prize dataset.
-It now has a concrete direction:
+This project studies a focused question:
 
-1. Use public IMDb user ratings as auxiliary information.
-2. Match those ratings to Netflix Prize movie ids.
-3. Run a probabilistic record-linkage attack against anonymous Netflix customer
-   ids.
-4. Create anonymized Netflix releases by removing/generalizing dates,
-   coarsening ratings, adding noise, suppressing low-k facts, and removing rare
-   movies.
-5. Add ML red-team audits with sparse nearest-neighbor linkage and
-   membership-inference classifiers.
-6. Generate synthetic releases with SDV single-table synthesizers.
-7. Compare privacy risk with k-anonymity, sampled linkage attacks, and ML
-   attacks.
-8. Compare utility with recommender baselines, including the package bias model
-   and notebook PySpark ALS experiments.
+> How much re-identification risk is created by sparse movie/rating/date facts,
+> and how much recommender utility survives simple anonymization defenses?
 
-The maintained package implementation lives in `src/guardrails_sensitive_data`.
-The active notebooks in `notebooks/` are empirical studies and prototypes; the
-old notebooks in `notebooks/old/` are historical exploration.
+Concretely, we are able to achieve the following:
+
+1. Load Netflix Prize data or generate synthetic Netflix-like data.
+2. Build anonymized release variants.
+3. Measure k-anonymity and sampled linkage risk.
+4. Run an IMDb-style probabilistic linkage attack.
+5. Compare downstream recommender utility.
+6. Build a public-safe Markdown report and privacy-utility frontier plot.
+
+## Quick Demo
+
+Run the public-safe demo without the restricted Netflix Prize files:
+
+```bash
+python main.py run-demo --synthetic
+```
+
+This writes synthetic data summaries, a planted linkage benchmark, a
+privacy-utility frontier, and:
+
+```text
+reports/synthetic_privacy_utility_report.md
+```
+
+## Source Layout
+
+The maintained package lives in `src/guardrails_sensitive_data/`:
+
+- `data.py`: Netflix file readers, IMDb cache/runtime profile loading, title
+  matching, and synthetic Netflix-like data generation.
+- `anonymization.py`: release variants, k-anonymity summaries, sampled
+  linkage-risk evaluation, and public-safe id hashing.
+- `linkage.py`: probabilistic IMDb-to-Netflix linkage attack and planted
+  synthetic linkage benchmark.
+- `recommender.py`: fast bias-model recommender plus RMSE, MAE, hit-rate, and
+  NDCG utility metrics.
+- `reporting.py`: privacy-utility frontier table, plot, and Markdown report.
+- `cli.py`: command-line orchestration.
+- `__main__.py` and `__init__.py`: package entry points and compatibility
+  aliases for older notebooks.
+
+The older `imdb`, `netflix_io`, and `synthetic` module names are aliased to
+`data.py` for notebook compatibility, but new code should import from
+`guardrails_sensitive_data.data`.
+
+For a more detailed map, see:
+
+```text
+PROJECT_STRUCTURE_GUIDE.md
+```
 
 ## Ethical Scope
 
-This repository is for a data privacy course/project. Run linkage attacks only
-on public IMDb profiles used for demonstration, and do not publish or contact
-candidate real-world identities. The purpose is to quantify privacy risk and
-evaluate defenses.
+This repository is for privacy-risk measurement and defense evaluation. Do not
+publish raw candidate Netflix customer ids, and do not contact or identify
+candidate real-world users.
+
+Detailed CLI outputs use hashed identifiers by default. The
+`--unsafe-include-customer-ids` option exists only for private local debugging.
 
 ## Data
 
-The Netflix Prize data is not redistributed here. Place the official files in
-`data/netflix/`:
+The Netflix Prize data is not redistributed here. If you have authorized access,
+place the official files in `data/netflix/`:
 
 - `combined_data_1.txt`
 - `combined_data_2.txt`
@@ -41,175 +77,99 @@ The Netflix Prize data is not redistributed here. Place the official files in
 - `movie_titles.csv` or `movie_titles.txt`
 - `probe.txt` for official holdout evaluation
 
-This workspace already has the Netflix files locally, so normal commands can
-run without downloading anything.
-
-Verify the local data:
+Verify local files:
 
 ```bash
 python main.py verify-data --require-probe
 ```
 
-If you have an authorized archive URL or local archive:
+The cached IMDb ratings file used by default is:
 
-```bash
-python main.py download-netflix --url "https://example.com/authorized/netflix.zip"
-python main.py download-netflix --archive /path/to/netflix.zip
+```text
+notebooks/imdb_data.csv
 ```
+
+`linkage-attack` uses that CSV first. If you pass a username/user id/profile URL
+that is not in the cache, the CLI attempts a best-effort live scrape of the
+public IMDb ratings page at runtime. By default it tries lightweight HTTP first,
+then falls back to a Selenium-rendered Chrome page when the optional scrape
+dependencies are installed. IMDb can block automated traffic or change markup,
+so scraped runs print explicit success/failure messages and warnings when
+profile age cannot be detected, when profile creation or earliest visible rating
+activity appears to be after 2006, or when scraped rated titles fall outside the
+Netflix Prize data window.
+
+For fully reproducible cache-only runs, add `--no-scrape`.
 
 ## Environment
 
-The recommended environment is Python 3.12. The ML notebooks use current
-compatible major versions of scikit-learn, SDV, and PySpark:
+Recommended Python: 3.12.
 
-- `scikit-learn>=1.9,<2.0`
-- `sdv>=1.37,<2.0`
-- `pyspark[sql]>=4.1,<4.2`
-- `pyarrow>=15.0`
-
-PySpark 4.1 requires Java 17 or later with `JAVA_HOME` set. On macOS, for
-example:
+Install the lightweight CLI/package:
 
 ```bash
-brew install openjdk@17
-export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -e .
 ```
 
-Using conda is the easiest path because `environment.yml` installs the package
-plus the notebook ML dependencies:
+For the notebook experiments with SDV, scikit-learn, and PySpark:
+
+```bash
+python -m pip install -e ".[ml]"
+```
+
+For runtime IMDb scraping with Selenium and BeautifulSoup:
+
+```bash
+python -m pip install -e ".[scrape]"
+```
+
+Conda users can also use:
 
 ```bash
 conda env create -f environment.yml
 conda activate erdos_project_environment
 ```
 
-Or with pip:
-
-```bash
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -e ".[ml]"
-```
-
-For the lightweight CLI-only install, omit the ML extra:
-
-```bash
-python -m pip install -e .
-```
-
-The CLI works from the repository root even before installation:
+## CLI Commands
 
 ```bash
 python main.py --help
 ```
 
-After installation, the same commands are available as:
+Maintained commands:
 
-```bash
-netflix-privacy --help
-```
+- `verify-data`: check local Netflix Prize files.
+- `linkage-attack`: run IMDb-to-Netflix probabilistic linkage from cached IMDb
+  rows or a live public profile scrape.
+- `privacy-eval`: evaluate anonymized releases with k-anonymity and sampled
+  candidate-set sizes.
+- `rmse-eval`: compare recommender utility across release variants.
+- `run-demo`: run a small end-to-end demo; use `--synthetic` for public-safe
+  data.
+- `build-report`: build or rebuild the Markdown report and frontier artifacts
+  from existing CSV outputs.
 
-## Notebooks
-
-Active notebooks:
-
-- `notebooks/01_synthetic_netflix_generator.ipynb` uses SDV
-  `GaussianCopulaSynthesizer` by default, with simple switches for CTGAN and
-  TVAE.
-- `notebooks/02_ml_deanonymization_attacks.ipynb` uses scikit-learn sparse
-  vectors, `NearestNeighbors`, and `LogisticRegression` for red-team audits.
-- `notebooks/03_als_downstream_and_anonymization_feedback.ipynb` uses PySpark
-  MLlib ALS and item-factor diagnostics to guide targeted anonymization noise.
-- `notebooks/04_empirical_privacy_utility_study.ipynb` is the cohesive
-  report-style study that combines probabilistic linkage, anonymization,
-  nearest-neighbor attacks, membership inference, synthetic data, downstream
-  utility, plots, citations, and takeaways.
-
-Run notebooks from the repository root so relative imports and data paths line
-up:
-
-```bash
-jupyter lab
-```
-
-## IMDb Ratings
-
-The cached exploratory file `notebooks/imdb_data.csv` includes ratings for
-`planktonrules` and other public IMDb users. Use that for reproducible runs:
-
-```bash
-python main.py linkage-attack --user planktonrules
-```
-
-To fetch a public IMDb ratings page into a CSV, supply a user id or, preferably,
-the full `/ratings` URL:
-
-```bash
-python main.py scrape-imdb \
-  --user planktonrules \
-  --ratings-url "https://www.imdb.com/user/urXXXXXXXX/ratings" \
-  --output reports/imdb_planktonrules.csv
-```
-
-IMDb markup changes often and may require login or JavaScript. Cached CSVs are
-the reliable research path.
-
-## Experiments
-
-Run the probabilistic linkage attack:
+Examples:
 
 ```bash
 python main.py linkage-attack --user planktonrules --top-n 50
-```
-
-Outputs:
-
-- `reports/linkage_planktonrules_matched_titles.csv`
-- `reports/linkage_planktonrules_facts.csv`
-- `reports/linkage_planktonrules_candidates.csv`
-
-Evaluate anonymization defenses:
-
-```bash
+python main.py linkage-attack --user new_reviewer --ratings-url "https://www.imdb.com/user/p.example/ratings"
+python main.py linkage-attack --user "https://www.imdb.com/user/p.example/ratings" --imdb-max-pages 2
+python main.py linkage-attack --user "https://www.imdb.com/user/p.example/ratings" --imdb-fetch-method browser --imdb-browser-headed
 python main.py privacy-eval --max-rows 1000000 --trials 300
-```
-
-Outputs:
-
-- `reports/privacy_k_anonymity_summary.csv`
-- `reports/privacy_linkage_trials.csv`
-- `reports/privacy_linkage_summary.csv`
-
-Compare downstream RMSE:
-
-```bash
 python main.py rmse-eval --max-rows 1000000
+python main.py run-demo --synthetic
+python main.py build-report --prefix synthetic_ --title "Synthetic Netflix Privacy-Utility Audit"
 ```
 
-For the official probe holdout, use:
+For the official probe holdout:
 
 ```bash
 python main.py rmse-eval --holdout probe --max-train-rows 5000000 --max-probe-rows 100000
 ```
-
-The default RMSE path uses a random holdout from a sampled subset, which is much
-faster and is enough to compare releases consistently.
-
-Run a small end-to-end demo:
-
-```bash
-python main.py run-demo --max-rows 200000 --trials 50
-```
-
-For the full empirical report, open:
-
-```bash
-jupyter lab notebooks/04_empirical_privacy_utility_study.ipynb
-```
-
-The report notebook has runtime knobs at the top, including `MAX_ROWS`,
-`PRIVACY_TRIALS`, `PROFILE_USERS`, and `SYNTH_TRAIN_ROWS`.
 
 ## Release Variants
 
@@ -225,28 +185,48 @@ The blue-team releases currently evaluated are:
 - suppress low-k movie/rating/month facts
 - movie only
 
-`movie_only` is useful for privacy comparison but is skipped for RMSE because it
+`movie_only` is useful for privacy comparison but skipped for RMSE because it
 does not release rating labels.
+
+## Notebooks
+
+The notebooks are retained as research/prototype material. The most important
+one is:
+
+```text
+notebooks/04_empirical_privacy_utility_study.ipynb
+```
+
+The maintained execution path is the CLI and package code. Prefer adding new
+reusable logic to `src/guardrails_sensitive_data/` and using notebooks for
+explanation and plots.
+
+## Public Output Hygiene
+
+`reports/` is for generated local artifacts. Aggregated summaries and synthetic
+reports are safe to share; detailed attack outputs should be redacted or
+regenerated from synthetic data before publication.
+
+Local Netflix Prize data, generated reports, bytecode, and package build
+artifacts are ignored by `.gitignore`.
 
 ## Method References
 
-The notebooks cite the full reference list. The main methodological anchors are:
+The main methodological anchors are:
 
 - Narayanan and Shmatikov, "Robust De-anonymization of Large Sparse Datasets"
   for the Netflix linkage threat model.
 - Sweeney's k-anonymity model for fact suppression/generalization.
-- scikit-learn nearest-neighbor and logistic-regression models for ML red-team
-  audits.
-- SDV, Gaussian Copula, CTGAN, and TVAE for plug-and-play synthetic tabular
-  data generation.
-- Spark MLlib ALS and matrix factorization for the stronger downstream
-  recommender baseline.
-- Membership-inference attacks for user-presence risk.
+- Regularized bias recommenders and matrix-factorization-style utility metrics
+  for downstream recommendation quality.
+- SDV and Spark ALS remain notebook-only extensions, not part of the simplified
+  core package.
 
 ## Tests
 
 ```bash
-python -m unittest discover
+PYTHONDONTWRITEBYTECODE=1 python -m unittest discover
 ```
 
 The tests use tiny synthetic Netflix files and do not require the full dataset.
+GitHub Actions runs the same suite on Python 3.12.

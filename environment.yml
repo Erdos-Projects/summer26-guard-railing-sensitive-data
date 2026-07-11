@@ -4,17 +4,16 @@ channels:
 dependencies:
   - python = 3.12
   - pip >= 24.0
-  - beautifulsoup4 >= 4.12
   - jupyter >= 1.1
   - matplotlib >= 3.8
   - numpy >= 2.0
   - pandas >= 2.2
-  - requests >= 2.32
-  - scipy >= 1.13
   - seaborn >= 0.13
   - pip:
       - "-e ."
+      - "beautifulsoup4>=4.12,<5"
       - "pyarrow>=15.0"
       - "pyspark[sql]>=4.1,<4.2"
       - "scikit-learn>=1.9,<2.0"
       - "sdv>=1.37,<2.0"
+      - "selenium>=4.23,<5"
