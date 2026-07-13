@@ -125,6 +125,7 @@ Active notebooks:
   report-style study that combines probabilistic linkage, anonymization,
   nearest-neighbor attacks, membership inference, synthetic data, downstream
   utility, plots, citations, and takeaways.
+- final_pipeline.ipynb contains the final anonymization pipeline with the final privacy-utility curves.
 
 Run notebooks from the repository root so relative imports and data paths line
 up:
